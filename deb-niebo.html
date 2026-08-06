@@ -134,6 +134,18 @@
     color: #8a93b8;
   }
 
+  .rain-drop {
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+
+  .rain-now {
+    text-align: center;
+    color: #8a93b8;
+    font-size: 0.85rem;
+    margin-top: 6px;
+  }
+
   .refresh-btn {
     display: block;
     margin: 14px auto 0;
@@ -195,13 +207,22 @@
     </div>
 
     <div class="card">
-      <h2>Zachmurzenie</h2>
+      <h2>Niebo</h2>
       <div class="sky-current">
         <div class="big" id="cloud-now">—</div>
         <div class="label">zachmurzenie teraz</div>
+        <div class="rain-now" id="rain-now">—</div>
       </div>
       <div class="hours" id="hours-strip"></div>
       <button class="refresh-btn" id="refresh-btn">↻ Odśwież pogodę</button>
+    </div>
+
+    <div class="card">
+      <h2>Słońce</h2>
+      <div class="moon-dates">
+        <div><b id="sun-rise">—</b>wschód</div>
+        <div><b id="sun-set">—</b>zachód</div>
+      </div>
     </div>
   </div>
 
@@ -280,7 +301,10 @@
 
     async function fetchSky() {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}` +
-                  `&current=cloud_cover&hourly=cloud_cover&timezone=auto&forecast_days=2`;
+                  `&current=cloud_cover,precipitation` +
+                  `&hourly=cloud_cover,precipitation_probability` +
+                  `&daily=sunrise,sunset` +
+                  `&timezone=auto&forecast_days=2`;
       const res = await fetch(url);
       if (!res.ok) throw new Error("Błąd pobierania pogody: " + res.status);
       return res.json();
@@ -288,7 +312,10 @@
 
     function renderSky(data) {
       const cloudNow = data.current.cloud_cover;
+      const rainNow = data.current.precipitation;
       document.getElementById("cloud-now").textContent = cloudNow + "%";
+      document.getElementById("rain-now").textContent =
+        rainNow > 0 ? `pada: ${rainNow} mm/h` : "brak opadów teraz";
 
       // znajdź w danych godzinowych indeks najbliższy "teraz"
       const now = new Date();
@@ -296,24 +323,37 @@
       let startIdx = times.findIndex(t => t >= now);
       if (startIdx === -1) startIdx = 0;
 
-      const nextHours = [];
+      const nextClouds = [];
+      const nextRainChances = [];
       const strip = document.getElementById("hours-strip");
       strip.innerHTML = "";
       for (let i = startIdx; i < startIdx + 12 && i < times.length; i++) {
         const cloud = data.hourly.cloud_cover[i];
-        nextHours.push(cloud);
+        const rainChance = data.hourly.precipitation_probability[i];
+        nextClouds.push(cloud);
+        nextRainChances.push(rainChance);
 
         const bar = document.createElement("div");
         bar.className = "hour-bar";
         bar.innerHTML = `
+          <div class="rain-drop" style="opacity:${rainChance / 100}">💧</div>
           <div class="bar" style="height:${Math.max(cloud, 3)}%; background:${cloud > 60 ? "#8a93b8" : "#5b6bd6"}"></div>
           <div class="t">${times[i].getHours()}</div>
         `;
         strip.appendChild(bar);
       }
 
-      const avgNextHours = nextHours.reduce((a, b) => a + b, 0) / nextHours.length;
-      return { cloudNow, avgNextHours };
+      const avgNextHours = nextClouds.reduce((a, b) => a + b, 0) / nextClouds.length;
+      const avgRainChance = nextRainChances.reduce((a, b) => a + b, 0) / nextRainChances.length;
+      return { cloudNow, avgNextHours, avgRainChance };
+    }
+
+    function renderSun(daily) {
+      // daily.sunrise[0] / daily.sunset[0] to dzisiejszy wschód/zachód,
+      // jako tekst ISO np. "2026-08-06T05:12" — wyciągamy z niego "HH:MM"
+      const formatTime = iso => iso.slice(11, 16);
+      document.getElementById("sun-rise").textContent = formatTime(daily.sunrise[0]);
+      document.getElementById("sun-set").textContent = formatTime(daily.sunset[0]);
     }
 
     // ═══════════════════════════════════════════════
@@ -322,11 +362,14 @@
 
     function renderVerdict(moonInfo, skyInfo) {
       const el = document.getElementById("verdict");
-      const { cloudNow } = skyInfo;
+      const { cloudNow, avgRainChance } = skyInfo;
       const { illumination } = moonInfo;
 
       let text, note;
-      if (cloudNow <= 25 && illumination <= 40) {
+      if (avgRainChance >= 50) {
+        text = "🌧️ Szykuje się deszcz";
+        note = `Szansa na opady w najbliższych godzinach: ${Math.round(avgRainChance)}%.`;
+      } else if (cloudNow <= 25 && illumination <= 40) {
         text = "🔭 Świetna noc na obserwacje nieba!";
         note = "Mało chmur, księżyc nie przyćmiewa gwiazd.";
       } else if (cloudNow <= 50) {
@@ -351,6 +394,7 @@
       try {
         const data = await fetchSky();
         const skyInfo = renderSky(data);
+        renderSun(data.daily);
         renderVerdict(moonInfo, skyInfo);
       } catch (err) {
         document.getElementById("verdict").textContent = "Nie udało się pobrać danych pogodowych 😕";
