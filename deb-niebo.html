@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Niebo nad Dębiną</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top, #131a33 0%, #0b0e1a 60%, #05060c 100%);
+    color: #e8ecf7;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 24px 16px 60px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  header p {
+    color: #8a93b8;
+    margin-top: 6px;
+    font-size: 0.9rem;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .card {
+    flex: 1 1 320px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 22px;
+  }
+
+  .card h2 {
+    font-size: 1rem;
+    color: #a7b0d6;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  /* --- panel Księżyca --- */
+  .moon-emoji {
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .moon-name {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .moon-illum {
+    text-align: center;
+    color: #8a93b8;
+    margin-bottom: 18px;
+  }
+
+  .moon-dates {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #c2c8e6;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 14px;
+  }
+
+  .moon-dates div { text-align: center; flex: 1; }
+  .moon-dates b { display: block; font-size: 1.1rem; color: #fff; }
+
+  /* --- panel Nieba --- */
+  .sky-current {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  .sky-current .big {
+    font-size: 2.6rem;
+    font-weight: 700;
+  }
+
+  .sky-current .label {
+    color: #8a93b8;
+    font-size: 0.85rem;
+  }
+
+  .hours {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 90px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 10px;
+  }
+
+  .hour-bar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    height: 100%;
+  }
+
+  .hour-bar .bar {
+    width: 100%;
+    max-width: 18px;
+    background: #5b6bd6;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .hour-bar .t {
+    font-size: 0.65rem;
+    color: #8a93b8;
+  }
+
+  .refresh-btn {
+    display: block;
+    margin: 14px auto 0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e8ecf7;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+  .refresh-btn:hover { background: rgba(255, 255, 255, 0.14); }
+
+  /* --- werdykt --- */
+  .verdict {
+    max-width: 900px;
+    margin: 20px auto 0;
+    text-align: center;
+    padding: 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 1.05rem;
+  }
+
+  .verdict .note {
+    display: block;
+    color: #8a93b8;
+    font-size: 0.85rem;
+    margin-top: 6px;
+  }
+
+  footer {
+    text-align: center;
+    color: #565e80;
+    font-size: 0.75rem;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>🌙 Niebo nad Dębiną</h1>
+    <p>54.6366°N, 17.01451°E</p>
+  </header>
+
+  <div class="cards">
+    <div class="card">
+      <h2>Faza Księżyca</h2>
+      <div class="moon-emoji" id="moon-emoji">🌑</div>
+      <div class="moon-name" id="moon-name">—</div>
+      <div class="moon-illum" id="moon-illum">—</div>
+      <div class="moon-dates">
+        <div><b id="days-to-new">—</b>dni do nowiu</div>
+        <div><b id="days-to-full">—</b>dni do pełni</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Zachmurzenie</h2>
+      <div class="sky-current">
+        <div class="big" id="cloud-now">—</div>
+        <div class="label">zachmurzenie teraz</div>
+      </div>
+      <div class="hours" id="hours-strip"></div>
+      <button class="refresh-btn" id="refresh-btn">↻ Odśwież pogodę</button>
+    </div>
+  </div>
+
+  <div class="verdict" id="verdict">
+    Ładowanie danych pogodowych…
+  </div>
+
+  <footer>dane pogodowe: open-meteo.com</footer>
+
+  <script>
+    // Współrzędne domu w Dębinie
+    const LAT = 54.6366;
+    const LON = 17.01451;
+
+    // ═══════════════════════════════════════════════
+    //  FAZA KSIĘŻYCA — czysta matematyka, bez API
+    // ═══════════════════════════════════════════════
+
+    // Długość cyklu księżycowego (nów → nów) w dniach
+    const SYNODIC_MONTH = 29.530588853;
+
+    // Znany moment nowiu, od którego liczymy (6 stycznia 2000, 18:14 UTC)
+    const KNOWN_NEW_MOON = Date.UTC(2000, 0, 6, 18, 14, 0);
+
+    // Nazwy i emoji dla 8 faz księżyca, posortowane wg pozycji w cyklu (0 = nów, 1 = powrót do nowiu)
+    const MOON_PHASES = [
+      { upTo: 0.0625, name: "Nów",                emoji: "🌑" },
+      { upTo: 0.1875, name: "Sierp przybywający",  emoji: "🌒" },
+      { upTo: 0.3125, name: "Pierwsza kwadra",     emoji: "🌓" },
+      { upTo: 0.4375, name: "Garb przybywający",   emoji: "🌔" },
+      { upTo: 0.5625, name: "Pełnia",              emoji: "🌕" },
+      { upTo: 0.6875, name: "Garb ubywający",      emoji: "🌖" },
+      { upTo: 0.8125, name: "Ostatnia kwadra",     emoji: "🌗" },
+      { upTo: 0.9375, name: "Sierp ubywający",     emoji: "🌘" },
+      { upTo: 1.01,   name: "Nów",                 emoji: "🌑" },
+    ];
+
+    function getMoonInfo(date) {
+      const daysSinceNewMoon = (date.getTime() - KNOWN_NEW_MOON) / 86400000;
+
+      // pozycja w bieżącym cyklu, w dniach (0 do SYNODIC_MONTH)
+      let cyclePos = daysSinceNewMoon % SYNODIC_MONTH;
+      if (cyclePos < 0) cyclePos += SYNODIC_MONTH;
+
+      // ta sama pozycja, ale jako ułamek 0..1
+      const fraction = cyclePos / SYNODIC_MONTH;
+
+      const phase = MOON_PHASES.find(p => fraction <= p.upTo);
+
+      // % oświetlenia tarczy (0% w nowiu, 100% w pełni)
+      const illumination = Math.round((1 - Math.cos(2 * Math.PI * fraction)) / 2 * 100);
+
+      const daysToNewMoon = Math.round(SYNODIC_MONTH - cyclePos);
+      const daysToFullMoon = Math.round(
+        cyclePos < SYNODIC_MONTH / 2
+          ? SYNODIC_MONTH / 2 - cyclePos
+          : SYNODIC_MONTH * 1.5 - cyclePos
+      );
+
+      return { name: phase.name, emoji: phase.emoji, illumination, daysToNewMoon, daysToFullMoon };
+    }
+
+    function renderMoon() {
+      const info = getMoonInfo(new Date());
+      document.getElementById("moon-emoji").textContent = info.emoji;
+      document.getElementById("moon-name").textContent = info.name;
+      document.getElementById("moon-illum").textContent = `oświetlenie: ${info.illumination}%`;
+      document.getElementById("days-to-new").textContent = info.daysToNewMoon;
+      document.getElementById("days-to-full").textContent = info.daysToFullMoon;
+      return info;
+    }
+
+    // ═══════════════════════════════════════════════
+    //  ZACHMURZENIE — Open-Meteo (darmowe, bez klucza)
+    // ═══════════════════════════════════════════════
+
+    async function fetchSky() {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}` +
+                  `&current=cloud_cover&hourly=cloud_cover&timezone=auto&forecast_days=2`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Błąd pobierania pogody: " + res.status);
+      return res.json();
+    }
+
+    function renderSky(data) {
+      const cloudNow = data.current.cloud_cover;
+      document.getElementById("cloud-now").textContent = cloudNow + "%";
+
+      // znajdź w danych godzinowych indeks najbliższy "teraz"
+      const now = new Date();
+      const times = data.hourly.time.map(t => new Date(t));
+      let startIdx = times.findIndex(t => t >= now);
+      if (startIdx === -1) startIdx = 0;
+
+      const nextHours = [];
+      const strip = document.getElementById("hours-strip");
+      strip.innerHTML = "";
+      for (let i = startIdx; i < startIdx + 12 && i < times.length; i++) {
+        const cloud = data.hourly.cloud_cover[i];
+        nextHours.push(cloud);
+
+        const bar = document.createElement("div");
+        bar.className = "hour-bar";
+        bar.innerHTML = `
+          <div class="bar" style="height:${Math.max(cloud, 3)}%; background:${cloud > 60 ? "#8a93b8" : "#5b6bd6"}"></div>
+          <div class="t">${times[i].getHours()}</div>
+        `;
+        strip.appendChild(bar);
+      }
+
+      const avgNextHours = nextHours.reduce((a, b) => a + b, 0) / nextHours.length;
+      return { cloudNow, avgNextHours };
+    }
+
+    // ═══════════════════════════════════════════════
+    //  WERDYKT — łączymy fazę księżyca i zachmurzenie
+    // ═══════════════════════════════════════════════
+
+    function renderVerdict(moonInfo, skyInfo) {
+      const el = document.getElementById("verdict");
+      const { cloudNow } = skyInfo;
+      const { illumination } = moonInfo;
+
+      let text, note;
+      if (cloudNow <= 25 && illumination <= 40) {
+        text = "🔭 Świetna noc na obserwacje nieba!";
+        note = "Mało chmur, księżyc nie przyćmiewa gwiazd.";
+      } else if (cloudNow <= 50) {
+        text = "🌥️ Widoczność w porządku";
+        note = illumination > 60
+          ? "Umiarkowane chmury, ale jasny księżyc przyćmi słabsze gwiazdy."
+          : "Umiarkowane zachmurzenie, momentami może się przejaśnić.";
+      } else {
+        text = "☁️ Słaba widoczność";
+        note = "Dużo chmur — raczej nie zobaczysz wiele.";
+      }
+
+      el.innerHTML = `${text}<span class="note">${note}</span>`;
+    }
+
+    // ═══════════════════════════════════════════════
+    //  START
+    // ═══════════════════════════════════════════════
+
+    async function init() {
+      const moonInfo = renderMoon();
+      try {
+        const data = await fetchSky();
+        const skyInfo = renderSky(data);
+        renderVerdict(moonInfo, skyInfo);
+      } catch (err) {
+        document.getElementById("verdict").textContent = "Nie udało się pobrać danych pogodowych 😕";
+        console.error(err);
+      }
+    }
+
+    document.getElementById("refresh-btn").addEventListener("click", init);
+
+    init();
+  </script>
+</body>
+</html>
