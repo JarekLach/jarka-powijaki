@@ -1,0 +1,25 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",       "x": 0,    "y": 0,    "w": 1180, "h": 1120, "title": "Three Skies — desktop" },
+    { "file": "Phone.dc.html",      "x": 1300, "y": 0,    "w": 390,  "h": 844,  "title": "Three Skies — phone" },
+    { "file": "DirectionB.dc.html", "x": 0,    "y": 1250, "w": 560,  "h": 580,  "title": "Direction B — Night sky" },
+    { "file": "DirectionC.dc.html", "x": 660,  "y": 1250, "w": 560,  "h": 580,  "title": "Direction C — Departure board" }
+  ],
+  "annotations": [
+    {
+      "id": "sample-data",
+      "x": -350,
+      "y": 0,
+      "w": 290,
+      "text": "Sat 22 + Sun 23 August 2026.\n\nAll forecast numbers are sample data — plausible late-August values, not a live feed. Swap them for real ones before this goes anywhere.\n\nBoth top artboards are live: the day toggle and the card footers work, and the phone has a working city switcher."
+    },
+    {
+      "id": "directions",
+      "x": 1300,
+      "y": 1130,
+      "w": 300,
+      "text": "Two alternate directions, kept low-fi on purpose — they are here to argue with, not to ship.\n\nThe built version above is the warm-editorial direction: flat vector city scenes, cream ground, one accent per city.\n\nSay which one you want and I will build it into the main artboards."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}
