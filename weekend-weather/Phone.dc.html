@@ -11,202 +11,236 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body { margin: 0; font-family: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif; }
-    a { color: #BF6134; text-decoration: none; }
-    a:hover { color: #9A4826; }
+    a { color: #BE5A3B; text-decoration: none; }
+    a:hover { color: #96422A; }
   </style>
 </helmet>
 
 <div style="width: 390px; height: 844px; overflow: hidden; background: #FAF5EC; color: #2E2A24; display: flex; flex-direction: column;">
 
-  <!-- ===== HERO ===== -->
   <div style="position: relative; height: 250px; flex: none;">
-    <sc-if value="{{ isSF }}" hint-placeholder-val="{{ true }}">
-      <svg viewBox="0 0 390 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display: block;">
-        <defs>
-          <linearGradient id="pSfSky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#E8EEF1"></stop>
-            <stop offset="0.6" stop-color="#C9D6DD"></stop>
-            <stop offset="1" stop-color="#AEC1CB"></stop>
-          </linearGradient>
-        </defs>
-        <rect width="390" height="250" fill="url(#pSfSky)"></rect>
-        <circle cx="312" cy="62" r="34" fill="#FCF6E4" opacity="0.75"></circle>
-        <path d="M0 184 L54 152 L102 180 L148 160 L194 184 L242 154 L296 182 L344 166 L390 186 L390 250 L0 250 Z" fill="#A3B7C1"></path>
-        <rect y="200" width="390" height="50" fill="#7F9BAA"></rect>
-        <path d="M0 152 Q60 126 110 72 Q160 126 195 156 Q230 126 280 72 Q330 126 390 152" fill="none" stroke="#C4562F" stroke-width="3.8" stroke-linecap="round"></path>
-        <g stroke="#C4562F" stroke-width="1.6" opacity="0.85">
-          <path d="M46 140 V186 M74 128 V186 M142 114 V186 M170 138 V186 M220 138 V186 M248 114 V186 M316 128 V186 M344 140 V186"></path>
-        </g>
-        <rect y="184" width="390" height="9" fill="#B34C27"></rect>
-        <polygon points="101,200 119,200 114,64 105,64" fill="#C4562F"></polygon>
-        <polygon points="271,200 289,200 284,64 275,64" fill="#C4562F"></polygon>
-        <g fill="#A8451F">
-          <rect x="101" y="112" width="18" height="8"></rect>
-          <rect x="102" y="150" width="17" height="8"></rect>
-          <rect x="271" y="112" width="18" height="8"></rect>
-          <rect x="272" y="150" width="17" height="8"></rect>
-        </g>
-        <polygon points="105,64 114,64 109.5,52" fill="#C4562F"></polygon>
-        <polygon points="275,64 284,64 279.5,52" fill="#C4562F"></polygon>
-        <g fill="#FFFFFF">
-          <rect x="-24" y="140" width="230" height="19" rx="9.5" opacity="0.62"></rect>
-          <rect x="172" y="166" width="250" height="17" rx="8.5" opacity="0.5"></rect>
-          <rect x="38" y="176" width="184" height="15" rx="7.5" opacity="0.45"></rect>
-        </g>
-        <g transform="translate(336,214)">
-          <polygon points="0,-18 0,0 -13,0" fill="#FFFDF7"></polygon>
-          <polygon points="2,-13 13,0 2,0" fill="#F3E7D2"></polygon>
-          <rect x="-15" y="0" width="30" height="4" rx="2" fill="#3E5A69"></rect>
-        </g>
-      </svg>
-    </sc-if>
-
-    <sc-if value="{{ isLDN }}" hint-placeholder-val="{{ false }}">
-      <svg viewBox="0 0 390 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display: block;">
-        <defs>
-          <linearGradient id="pLdnSky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#E2E7E2"></stop>
-            <stop offset="0.62" stop-color="#C7D0CB"></stop>
-            <stop offset="1" stop-color="#AAB6B2"></stop>
-          </linearGradient>
-        </defs>
-        <rect width="390" height="250" fill="url(#pLdnSky)"></rect>
-        <g fill="#FFFFFF" opacity="0.55">
-          <rect x="20" y="34" width="98" height="25" rx="12.5"></rect>
-          <rect x="50" y="20" width="64" height="23" rx="11.5"></rect>
-          <rect x="214" y="28" width="84" height="22" rx="11"></rect>
-        </g>
-        <g fill="#AFA492">
-          <rect x="160" y="150" width="30" height="72"></rect>
-          <rect x="195" y="164" width="39" height="58"></rect>
-          <rect x="128" y="172" width="28" height="50"></rect>
-          <path d="M160 150 l7 -14 h16 l7 14 Z"></path>
-          <path d="M195 164 l9 -13 h21 l9 13 Z"></path>
-        </g>
-        <g>
-          <rect x="262" y="102" width="41" height="120" fill="#C9B79C"></rect>
-          <rect x="292" y="102" width="11" height="120" fill="#B09B7E"></rect>
-          <rect x="257" y="93" width="51" height="14" rx="2" fill="#B09B7E"></rect>
-          <circle cx="282" cy="128" r="15" fill="#FBF4E4" stroke="#8E7A5F" stroke-width="2.8"></circle>
-          <path d="M282 128 V119 M282 128 l7 5" stroke="#8E7A5F" stroke-width="2.4" stroke-linecap="round" fill="none"></path>
-          <polygon points="282,42 308,93 257,93" fill="#B79F80"></polygon>
-          <rect x="279" y="30" width="7" height="14" rx="3.5" fill="#E8B84B"></rect>
-          <g fill="#B09B7E">
-            <rect x="265" y="164" width="9" height="21" rx="4.5"></rect>
-            <rect x="281" y="164" width="9" height="21" rx="4.5"></rect>
+    <sc-if value="{{ isDTG }}" hint-placeholder-val="{{ true }}">
+<svg viewBox="0 0 340 212" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display: block;">
+          <defs>
+            <linearGradient id="pDtgSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#DCEDE6"></stop>
+              <stop offset="0.58" stop-color="#B8D6CD"></stop>
+              <stop offset="1" stop-color="#9BC3B9"></stop>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="212" fill="url(#pDtgSky)"></rect>
+          <circle cx="62" cy="44" r="24" fill="#FBF3D4" opacity="0.9"></circle>
+          <g fill="#FFFFFF" opacity="0.6">
+            <rect x="196" y="30" width="72" height="17" rx="8.5"></rect>
+            <rect x="220" y="20" width="46" height="15" rx="7.5"></rect>
           </g>
-        </g>
-        <rect y="222" width="390" height="28" fill="#8B968F"></rect>
-        <ellipse cx="132" cy="227" rx="88" ry="6" fill="#76827C" opacity="0.6"></ellipse>
-        <g>
-          <rect x="38" y="140" width="138" height="82" rx="11" fill="#BE3B34"></rect>
-          <rect x="38" y="178" width="138" height="5" fill="#9C2B26"></rect>
-          <g fill="#F6EEDF">
-            <rect x="50" y="150" width="25" height="19" rx="3.5"></rect>
-            <rect x="82" y="150" width="25" height="19" rx="3.5"></rect>
-            <rect x="114" y="150" width="25" height="19" rx="3.5"></rect>
-            <rect x="146" y="150" width="21" height="19" rx="3.5"></rect>
-            <rect x="50" y="190" width="35" height="20" rx="3.5"></rect>
-            <rect x="93" y="190" width="35" height="20" rx="3.5"></rect>
-            <rect x="136" y="190" width="31" height="20" rx="3.5"></rect>
+          <path d="M0 96 L44 74 L88 92 L134 68 L182 90 L232 66 L286 88 L340 74 L340 130 L0 130 Z" fill="#8FA9A0"></path>
+          <path d="M0 120 L58 100 L120 118 L184 96 L248 116 L300 102 L340 116 L340 150 L0 150 Z" fill="#79987F"></path>
+          <path d="M170 146 L216 106 L262 122 L310 100 L340 112 L340 176 L150 176 Z" fill="#6E8F52"></path>
+          <g stroke="#57783F" stroke-width="1.5" opacity="0.9">
+            <path d="M180 152 L214 118 M194 158 L228 124 M208 164 L242 130 M222 170 L256 136 M236 174 L270 140 M250 176 L288 138 M264 176 L306 134 M280 176 L322 132"></path>
           </g>
-          <circle cx="68" cy="222" r="12" fill="#3B3730"></circle>
-          <circle cx="68" cy="222" r="5" fill="#8B968F"></circle>
-          <circle cx="150" cy="222" r="12" fill="#3B3730"></circle>
-          <circle cx="150" cy="222" r="5" fill="#8B968F"></circle>
-        </g>
-        <g transform="translate(46,70)">
-          <path d="M-28 0 A28 26 0 0 1 28 0 Z" fill="#E8B84B"></path>
-          <path d="M-28 0 A28 26 0 0 1 28 0" fill="none" stroke="#C99A2E" stroke-width="1.8"></path>
-          <path d="M0 0 V26 a7 7 0 0 0 14 0" fill="none" stroke="#8E7A5F" stroke-width="3" stroke-linecap="round"></path>
-        </g>
-        <g stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6">
-          <path d="M110 22 l-7 17M150 46 l-7 17M198 16 l-7 17M234 66 l-7 17M322 28 l-7 17M356 72 l-7 17M74 88 l-7 17M340 124 l-7 17M216 110 l-7 17M22 110 l-7 17M186 136 l-7 17M368 172 l-7 17"></path>
-        </g>
-      </svg>
-    </sc-if>
-
-    <sc-if value="{{ isTKY }}" hint-placeholder-val="{{ false }}">
-      <svg viewBox="0 0 390 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display: block;">
-        <defs>
-          <linearGradient id="pTkySky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#FDE0B4"></stop>
-            <stop offset="0.55" stop-color="#F7B893"></stop>
-            <stop offset="1" stop-color="#EE9184"></stop>
-          </linearGradient>
-        </defs>
-        <rect width="390" height="250" fill="url(#pTkySky)"></rect>
-        <circle cx="98" cy="82" r="48" fill="#FFF0C4" opacity="0.55"></circle>
-        <circle cx="98" cy="82" r="31" fill="#FFE79C"></circle>
-        <g fill="#FFFFFF" opacity="0.5">
-          <rect x="150" y="40" width="80" height="21" rx="10.5"></rect>
-          <rect x="175" y="28" width="50" height="18" rx="9"></rect>
-          <rect x="290" y="54" width="70" height="18" rx="9"></rect>
-        </g>
-        <g fill="#C9636A">
-          <rect x="12" y="164" width="39" height="62"></rect>
-          <rect x="58" y="143" width="30" height="83"></rect>
-          <rect x="94" y="179" width="46" height="47"></rect>
-          <rect x="147" y="155" width="32" height="71"></rect>
-          <rect x="186" y="186" width="39" height="40"></rect>
-          <rect x="328" y="160" width="34" height="66"></rect>
-          <rect x="367" y="181" width="23" height="45"></rect>
-        </g>
-        <g fill="#DE8A7E" opacity="0.75">
-          <rect x="19" y="176" width="8" height="9"></rect>
-          <rect x="35" y="176" width="8" height="9"></rect>
-          <rect x="19" y="194" width="8" height="9"></rect>
-          <rect x="35" y="194" width="8" height="9"></rect>
-          <rect x="64" y="157" width="7" height="9"></rect>
-          <rect x="76" y="157" width="7" height="9"></rect>
-          <rect x="64" y="178" width="7" height="9"></rect>
-          <rect x="154" y="169" width="8" height="9"></rect>
-          <rect x="166" y="169" width="7" height="9"></rect>
-          <rect x="335" y="174" width="8" height="10"></rect>
-          <rect x="349" y="174" width="8" height="10"></rect>
-        </g>
-        <g>
-          <polygon points="234,226 248,226 273,78 266,78" fill="#DC4F3C"></polygon>
-          <polygon points="305,226 291,226 266,78 273,78" fill="#DC4F3C"></polygon>
-          <g stroke="#DC4F3C" stroke-width="2.5" opacity="0.85">
-            <path d="M245 208 L294 208 M247 196 L277 144 M292 196 L262 144 M254 153 L285 153 M255 144 L275 109 M284 144 L264 109 M261 113 L278 113"></path>
+          <g>
+            <rect x="34" y="128" width="30" height="30" fill="#F2E8D6"></rect>
+            <polygon points="30,128 68,128 49,112" fill="#B4634A"></polygon>
+            <rect x="70" y="136" width="26" height="22" fill="#F2E8D6"></rect>
+            <polygon points="66,136 100,136 83,122" fill="#B4634A"></polygon>
+            <rect x="104" y="140" width="22" height="18" fill="#F2E8D6"></rect>
+            <polygon points="100,140 130,140 115,128" fill="#B4634A"></polygon>
+            <rect x="8" y="140" width="22" height="18" fill="#F2E8D6"></rect>
+            <polygon points="4,140 34,140 19,128" fill="#B4634A"></polygon>
+            <rect x="132" y="118" width="20" height="40" fill="#F6EFE0"></rect>
+            <polygon points="128,118 156,118 142,94" fill="#8F5340"></polygon>
+            <circle cx="142" cy="130" r="5" fill="#E8CF9B" stroke="#8F5340" stroke-width="1.2"></circle>
+            <rect x="140" y="86" width="4" height="10" fill="#8F5340"></rect>
           </g>
-          <polygon points="242,160 297,160 293,174 247,174" fill="#DC4F3C"></polygon>
-          <rect x="247" y="163" width="45" height="5" fill="#FBF1DE"></rect>
-          <polygon points="256,107 283,107 281,118 258,118" fill="#DC4F3C"></polygon>
-          <rect x="266" y="42" width="7" height="38" fill="#DC4F3C"></rect>
-          <rect x="266" y="53" width="7" height="6" fill="#FBF1DE"></rect>
-          <rect x="266" y="66" width="7" height="6" fill="#FBF1DE"></rect>
-          <circle cx="269.5" cy="37" r="5" fill="#FFE79C"></circle>
-        </g>
-        <rect y="226" width="390" height="24" fill="#B84E5C"></rect>
-        <g stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.5">
-          <path d="M106 238 q10 -9 20 0 q10 9 20 0"></path>
-          <path d="M172 243 q10 -9 20 0 q10 9 20 0"></path>
-          <path d="M314 238 q10 -9 20 0 q10 9 20 0"></path>
-        </g>
-      </svg>
-    </sc-if>
+          <rect y="158" width="340" height="54" fill="#7FA8B8"></rect>
+          <g stroke="#A6C6D2" stroke-width="2" stroke-linecap="round" opacity="0.85">
+            <path d="M14 172 h26 M56 180 h22 M186 170 h28 M240 184 h24 M292 174 h30 M100 190 h26"></path>
+          </g>
+          <g fill="#F4F1E6">
+            <path d="M46 186 q4 -12 8 0 l-2 10 h-4 Z"></path>
+            <path d="M50 186 l10 -5 l-8 7 Z"></path>
+            <path d="M72 194 q3.5 -10 7 0 l-1.5 8 h-4 Z"></path>
+            <path d="M76 194 l9 -4 l-7 6 Z"></path>
+          </g>
+          <g stroke="#F4F1E6" stroke-width="1.6" fill="none" stroke-linecap="round">
+            <path d="M46 196 v6 M54 196 v6 M72 202 v5 M80 202 v5"></path>
+          </g>
+        </svg>    </sc-if>
+    <sc-if value="{{ isDEB }}" hint-placeholder-val="{{ false }}">
+<svg viewBox="0 0 340 212" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display: block;">
+          <defs>
+            <linearGradient id="pDebSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#E6EFF3"></stop>
+              <stop offset="0.62" stop-color="#C4D7E0"></stop>
+              <stop offset="1" stop-color="#A9C4D1"></stop>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="212" fill="url(#pDebSky)"></rect>
+          <circle cx="248" cy="40" r="22" fill="#FBF6E6" opacity="0.7"></circle>
+          <g fill="#FFFFFF" opacity="0.62">
+            <rect x="20" y="26" width="88" height="18" rx="9"></rect>
+            <rect x="48" y="16" width="52" height="16" rx="8"></rect>
+            <rect x="196" y="60" width="74" height="15" rx="7.5"></rect>
+          </g>
+          <g stroke="#8FA6B4" stroke-width="1.8" fill="none" stroke-linecap="round">
+            <path d="M126 40 q5 -5 10 0 q5 5 10 0"></path>
+            <path d="M162 26 q4 -4 8 0 q4 4 8 0"></path>
+            <path d="M286 34 q4.5 -4.5 9 0 q4.5 4.5 9 0"></path>
+          </g>
+          <rect y="104" width="340" height="42" fill="#6E97AA"></rect>
+          <g stroke="#A7C4D0" stroke-width="2" stroke-linecap="round" opacity="0.9">
+            <path d="M10 118 h30 M62 130 h24 M110 114 h28 M172 128 h26 M226 118 h30 M286 132 h28 M148 140 h24 M258 142 h22"></path>
+          </g>
+          <path d="M0 146 Q60 138 118 146 Q190 155 262 144 Q306 138 340 146 L340 212 L0 212 Z" fill="#E9DDC2"></path>
+          <path d="M0 168 Q52 150 108 164 Q150 175 190 166 L190 212 L0 212 Z" fill="#DED0B0"></path>
+          <g>
+            <rect x="238" y="100" width="7" height="68" fill="#6B5A44"></rect>
+            <rect x="272" y="86" width="8" height="82" fill="#5E4E3B"></rect>
+            <rect x="306" y="108" width="7" height="60" fill="#6B5A44"></rect>
+            <g fill="#3E5F49">
+              <ellipse cx="241" cy="98" rx="21" ry="12"></ellipse>
+              <ellipse cx="231" cy="90" rx="14" ry="9"></ellipse>
+              <ellipse cx="252" cy="90" rx="13" ry="8"></ellipse>
+            </g>
+            <g fill="#4A6E53">
+              <ellipse cx="276" cy="82" rx="24" ry="14"></ellipse>
+              <ellipse cx="264" cy="72" rx="16" ry="10"></ellipse>
+              <ellipse cx="289" cy="73" rx="15" ry="9"></ellipse>
+            </g>
+            <g fill="#3E5F49">
+              <ellipse cx="309" cy="104" rx="20" ry="11"></ellipse>
+              <ellipse cx="300" cy="96" rx="13" ry="8"></ellipse>
+              <ellipse cx="318" cy="97" rx="12" ry="8"></ellipse>
+            </g>
+          </g>
+          <g stroke="#A8AE72" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <path d="M22 178 q-4 -14 -1 -20 M28 180 q1 -15 5 -21 M34 179 q5 -13 10 -18"></path>
+            <path d="M86 172 q-4 -13 -1 -19 M92 174 q1 -14 5 -20 M98 173 q5 -12 10 -17"></path>
+            <path d="M144 180 q-3 -12 0 -18 M150 182 q2 -13 6 -18"></path>
+          </g>
+          <g fill="#C9B893">
+            <rect x="182" y="184" width="52" height="5" rx="2.5" transform="rotate(-4 208 186)"></rect>
+            <rect x="186" y="196" width="52" height="5" rx="2.5" transform="rotate(-4 212 198)"></rect>
+          </g>
+          <g stroke="#F7F5EC" stroke-width="1.8" fill="none" stroke-linecap="round">
+            <path d="M56 60 q6 -6 12 0 q6 6 12 0"></path>
+            <path d="M96 76 q5 -5 10 0 q5 5 10 0"></path>
+          </g>
+        </svg>    </sc-if>
+    <sc-if value="{{ isWAW }}" hint-placeholder-val="{{ false }}">
+<svg viewBox="0 0 340 212" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display: block;">
+          <defs>
+            <linearGradient id="pWawSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FCEBCE"></stop>
+              <stop offset="0.55" stop-color="#F5CFA4"></stop>
+              <stop offset="1" stop-color="#EBB388"></stop>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="212" fill="url(#pWawSky)"></rect>
+          <circle cx="58" cy="52" r="34" fill="#FFF3D2" opacity="0.6"></circle>
+          <circle cx="58" cy="52" r="21" fill="#FFE9AE"></circle>
+          <g fill="#FFFFFF" opacity="0.45">
+            <rect x="112" y="30" width="66" height="16" rx="8"></rect>
+            <rect x="252" y="44" width="58" height="14" rx="7"></rect>
+          </g>
+          <g fill="#A9BDCB">
+            <rect x="14" y="118" width="26" height="72"></rect>
+            <rect x="46" y="136" width="20" height="54"></rect>
+            <path d="M74 190 V120 q14 -10 26 0 V190 Z"></path>
+            <rect x="286" y="112" width="24" height="78"></rect>
+            <rect x="316" y="140" width="18" height="50"></rect>
+          </g>
+          <g fill="#C6D6E0" opacity="0.85">
+            <rect x="18" y="126" width="18" height="4"></rect>
+            <rect x="18" y="138" width="18" height="4"></rect>
+            <rect x="18" y="150" width="18" height="4"></rect>
+            <rect x="18" y="162" width="18" height="4"></rect>
+            <rect x="50" y="144" width="12" height="4"></rect>
+            <rect x="50" y="156" width="12" height="4"></rect>
+            <rect x="50" y="168" width="12" height="4"></rect>
+            <rect x="79" y="130" width="16" height="4"></rect>
+            <rect x="79" y="142" width="16" height="4"></rect>
+            <rect x="79" y="154" width="16" height="4"></rect>
+            <rect x="290" y="120" width="16" height="4"></rect>
+            <rect x="290" y="132" width="16" height="4"></rect>
+            <rect x="290" y="144" width="16" height="4"></rect>
+            <rect x="290" y="156" width="16" height="4"></rect>
+          </g>
+          <g>
+            <rect x="126" y="152" width="88" height="38" fill="#C9A883"></rect>
+            <rect x="136" y="124" width="68" height="28" fill="#D3B491"></rect>
+            <rect x="146" y="100" width="48" height="24" fill="#C9A883"></rect>
+            <rect x="154" y="80" width="32" height="20" fill="#D3B491"></rect>
+            <polygon points="157,80 183,80 178,62 162,62" fill="#C9A883"></polygon>
+            <rect x="167" y="20" width="6" height="42" fill="#AE8C69"></rect>
+            <circle cx="170" cy="17" r="4" fill="#F6E2B4"></circle>
+            <g fill="#AE8C69" opacity="0.75">
+              <rect x="132" y="160" width="5" height="22"></rect>
+              <rect x="144" y="160" width="5" height="22"></rect>
+              <rect x="156" y="160" width="5" height="22"></rect>
+              <rect x="168" y="160" width="5" height="22"></rect>
+              <rect x="180" y="160" width="5" height="22"></rect>
+              <rect x="192" y="160" width="5" height="22"></rect>
+              <rect x="204" y="160" width="5" height="22"></rect>
+              <rect x="142" y="130" width="5" height="16"></rect>
+              <rect x="154" y="130" width="5" height="16"></rect>
+              <rect x="166" y="130" width="5" height="16"></rect>
+              <rect x="178" y="130" width="5" height="16"></rect>
+              <rect x="190" y="130" width="5" height="16"></rect>
+              <rect x="152" y="105" width="5" height="14"></rect>
+              <rect x="164" y="105" width="5" height="14"></rect>
+              <rect x="176" y="105" width="5" height="14"></rect>
+              <rect x="160" y="86" width="5" height="9"></rect>
+              <rect x="172" y="86" width="5" height="9"></rect>
+            </g>
+          </g>
+          <g fill="#B99B7C">
+            <rect x="232" y="132" width="22" height="58"></rect>
+            <rect x="258" y="150" width="18" height="40"></rect>
+          </g>
+          <rect y="190" width="340" height="22" fill="#9E7A5E"></rect>
+          <path d="M0 186 H340" stroke="#8A6850" stroke-width="1.6"></path>
+          <g>
+            <rect x="188" y="160" width="96" height="30" rx="7" fill="#C0392F"></rect>
+            <rect x="188" y="176" width="96" height="3" fill="#98281F"></rect>
+            <g fill="#F7EEDC">
+              <rect x="196" y="166" width="17" height="12" rx="2.5"></rect>
+              <rect x="219" y="166" width="17" height="12" rx="2.5"></rect>
+              <rect x="242" y="166" width="17" height="12" rx="2.5"></rect>
+              <rect x="265" y="166" width="12" height="12" rx="2.5"></rect>
+            </g>
+            <circle cx="206" cy="190" r="6.5" fill="#3B3730"></circle>
+            <circle cx="266" cy="190" r="6.5" fill="#3B3730"></circle>
+            <path d="M234 160 L228 146 M228 146 H298" stroke="#7C6A56" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+          </g>
+        </svg>    </sc-if>
 
-    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(46,42,36,0.28) 0%, rgba(46,42,36,0) 34%, rgba(46,42,36,0) 58%, rgba(46,42,36,0.42) 100%); pointer-events: none;"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(46,42,36,0.3) 0%, rgba(46,42,36,0) 32%, rgba(46,42,36,0) 54%, rgba(46,42,36,0.46) 100%); pointer-events: none;"></div>
 
     <div style="position: absolute; top: 20px; left: 22px; right: 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
       <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #FFFDF9;">Three Skies</span>
-      <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFDF9; background: rgba(46,42,36,0.34); padding: 6px 12px; border-radius: 999px;">{{ c.tz }}</span>
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFDF9; background: rgba(46,42,36,0.36); padding: 6px 12px; border-radius: 999px;">{{ c.code }}</span>
     </div>
 
-    <div style="position: absolute; left: 22px; bottom: 40px; display: flex; flex-direction: column; gap: 3px;">
-      <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -0.035em; line-height: 1; color: #FFFDF9;">{{ c.name }}</h1>
-      <p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: rgba(255,253,249,0.86);">{{ c.region }}</p>
+    <div style="position: absolute; left: 22px; right: 22px; bottom: 40px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0;">
+        <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -0.035em; line-height: 1; color: #FFFDF9;">{{ c.name }}</h1>
+        <p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: rgba(255,253,249,0.88);">{{ c.region }}</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 7px; flex: none; padding: 6px 11px; border-radius: 999px; background: rgba(46,42,36,0.36);">
+        <span style="width: 7px; height: 7px; border-radius: 999px; {{ dataDotStyle }}"></span>
+        <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #FFFDF9;">{{ dataTitle }}</span>
+      </div>
     </div>
   </div>
 
-  <!-- ===== BODY ===== -->
   <div style="flex: 1 1 auto; min-height: 0; margin-top: -22px; background: #FAF5EC; border-radius: 24px 24px 0 0; padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 15px;">
 
     <div style="display: flex; gap: 8px;">
       <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="3">
-        <button onClick="{{ tab.pick }}" style="flex: 1 1 0; min-width: 0; height: 46px; font-family: inherit; font-size: 14px; font-weight: 600; letter-spacing: -0.01em; border-radius: 999px; border: 1px solid; cursor: pointer; transition: all 140ms ease; {{ tab.style }}">{{ tab.label }}</button>
+        <button onClick="{{ tab.pick }}" style="flex: 1 1 0; min-width: 0; height: 46px; font-family: inherit; font-size: 14px; font-weight: 600; letter-spacing: -0.015em; border-radius: 999px; border: 1px solid; cursor: pointer; transition: all 140ms ease; {{ tab.style }}">{{ tab.label }}</button>
       </sc-for>
     </div>
 
@@ -224,43 +258,29 @@
         <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.11em; text-transform: uppercase; color: #9A8F80;">High &middot; low {{ c.lo }}{{ deg }}</span>
       </div>
       <div style="color: {{ c.accent }}; flex: none;">
-        <sc-if value="{{ c.iconFog }}" hint-placeholder-val="{{ true }}">
-          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="16.5" cy="7" r="3.2"></circle>
-            <path d="M16.5 1.6v1.4M16.5 11v1.4M12.7 3.2l1 1M20.3 10.8l-1-1M11.1 7h1.4M20.5 7h1.4M12.7 10.8l1-1M20.3 3.2l-1 1"></path>
-            <path d="M2.5 14.5h13M4.5 18h15M2.5 21.5h11"></path>
-          </svg>
-        </sc-if>
-        <sc-if value="{{ c.iconSun }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ c.isSun }}" hint-placeholder-val="{{ true }}">
           <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4.6"></circle>
             <path d="M12 1.8v3M12 19.2v3M4.4 4.4l2.1 2.1M17.5 17.5l2.1 2.1M1.8 12h3M19.2 12h3M4.4 19.6l2.1-2.1M17.5 6.5l2.1-2.1"></path>
           </svg>
         </sc-if>
-        <sc-if value="{{ c.iconRain }}" hint-placeholder-val="{{ false }}">
-          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6.6 15.4a4.1 4.1 0 0 1 .5-8.2 5.6 5.6 0 0 1 10.7 1.5 3.6 3.6 0 0 1-.6 6.7"></path>
-            <path d="M8.4 18.2l-1.3 3M13 18.2l-1.3 3M17.6 18.2l-1.3 3"></path>
-          </svg>
-        </sc-if>
-        <sc-if value="{{ c.iconPartly }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ c.isPartly }}" hint-placeholder-val="{{ false }}">
           <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="8.4" cy="8" r="3.3"></circle>
             <path d="M8.4 2.3v1.5M2.7 8h1.5M4.4 4l1.1 1.1M12.4 4l-1.1 1.1M4.4 12l1.1-1.1"></path>
             <path d="M10.6 19.4a3.9 3.9 0 0 1 .5-7.8 5.3 5.3 0 0 1 10.1 1.4 3.4 3.4 0 0 1-.6 6.4Z"></path>
           </svg>
         </sc-if>
-        <sc-if value="{{ c.iconStorm }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ c.isRain }}" hint-placeholder-val="{{ false }}">
+          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.6 15.4a4.1 4.1 0 0 1 .5-8.2 5.6 5.6 0 0 1 10.7 1.5 3.6 3.6 0 0 1-.6 6.7"></path>
+            <path d="M8.4 18.2l-1.3 3M13 18.2l-1.3 3M17.6 18.2l-1.3 3"></path>
+          </svg>
+        </sc-if>
+        <sc-if value="{{ c.isStorm }}" hint-placeholder-val="{{ false }}">
           <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6.6 15.4a4.1 4.1 0 0 1 .5-8.2 5.6 5.6 0 0 1 10.7 1.5 3.6 3.6 0 0 1-.6 6.7"></path>
             <path d="M13.4 12.6l-3.2 5.1h3.6l-2.4 4.3"></path>
-          </svg>
-        </sc-if>
-        <sc-if value="{{ c.iconHot }}" hint-placeholder-val="{{ false }}">
-          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="9.6" r="4.2"></circle>
-            <path d="M12 0.9v2.6M12 15.7v2.6M5.2 3.5l1.9 1.9M16.9 13.9l1.9 1.9M1.3 9.6h2.6M20.1 9.6h2.6M5.2 15.8l1.9-1.9M16.9 5.4l1.9-1.9"></path>
-            <path d="M4 21q2.6-2.4 5.2 0t5.2 0 5.2 0"></path>
           </svg>
         </sc-if>
       </div>
@@ -314,49 +334,56 @@
   "units": {"editor": "enum", "options": ["Celsius", "Fahrenheit"], "default": "Celsius", "section": "Display"},
   "$preview": {"width": 390, "height": 844}
 }'>
-var CITIES = [
-  {
-    key: "sf", label: "SF", name: "San Francisco", region: "California, USA", tz: "GMT−7",
-    accent: "#BF6134", tint: "#EBC6B1", icons: ["iconFog", "iconSun"],
+var PLACES = [
+  { key: "dtg", label: "Döttingen", name: "Döttingen",  region: "Aargau, Schweiz",      code: "CH-5312",   accent: "#5C7F3A" },
+  { key: "deb", label: "Dębina",    name: "Dębina",     region: "Pomorskie, gm. Ustka", code: "PL 76-211", accent: "#2E7391" },
+  { key: "waw", label: "Warszawa",  name: "Warszawa",   region: "Mazowieckie, Polska",  code: "PL-MZ",     accent: "#BE5A3B" }
+];
+
+/* FORECAST-DATA-START — regenerated by fetch-forecast.mjs; do not hand-edit below */
+var META = { source: null, fetchedAt: null };
+
+var FORECAST = {
+  dtg: {
+    tint: "#C3D3B0",
     days: [
-      { hi: 18, lo: 12, blurb: "Fog until noon, then it burns off into wide open sun.", short: "Fog, then sun",
-        rain: "0%", wind: "18 km/h", hum: "78%",
-        hours: [["06", 12], ["09", 13], ["12", 16], ["15", 18], ["18", 17], ["21", 14]] },
-      { hi: 21, lo: 13, blurb: "Clear from first light. Bring a jumper for the evening anyway.", short: "Clear all day",
-        rain: "0%", wind: "14 km/h", hum: "66%",
-        hours: [["06", 13], ["09", 15], ["12", 19], ["15", 21], ["18", 19], ["21", 16]] }
+      { hi: 24, lo: 13, icon: "sun", blurb: "Sun over the vines all day, a few clouds drifting in after four.", short: "Sunny, few clouds",
+        rain: "10%", wind: "12 km/h", hum: "64%",
+        hours: [["06", 14], ["09", 18], ["12", 22], ["15", 24], ["18", 22], ["21", 17]] },
+      { hi: 26, lo: 14, icon: "partly", blurb: "Warm and still. Haze builds over the Aare towards evening.", short: "Warm and hazy",
+        rain: "20%", wind: "9 km/h", hum: "68%",
+        hours: [["06", 15], ["09", 19], ["12", 24], ["15", 26], ["18", 23], ["21", 18]] }
     ]
   },
-  {
-    key: "ldn", label: "London", name: "London", region: "England, UK", tz: "GMT+1",
-    accent: "#2C7F84", tint: "#A9CFD1", icons: ["iconRain", "iconPartly"],
+  deb: {
+    tint: "#AFCBD9",
     days: [
-      { hi: 22, lo: 14, blurb: "Showers through lunch, easing off by six. Umbrella weather.", short: "Showers till six",
-        rain: "60%", wind: "21 km/h", hum: "81%",
-        hours: [["06", 14], ["09", 16], ["12", 20], ["15", 22], ["18", 20], ["21", 17]] },
-      { hi: 24, lo: 15, blurb: "Bright spells most of the day, with one cheeky shower around four.", short: "Bright, one shower",
-        rain: "30%", wind: "16 km/h", hum: "70%",
-        hours: [["06", 15], ["09", 18], ["12", 22], ["15", 24], ["18", 22], ["21", 18]] }
+      { hi: 20, lo: 14, icon: "partly", blurb: "Sea breeze off the Baltic, cloud breaking up around noon.", short: "Breezy, brightening",
+        rain: "30%", wind: "26 km/h", hum: "79%",
+        hours: [["06", 14], ["09", 16], ["12", 19], ["15", 20], ["18", 19], ["21", 16]] },
+      { hi: 21, lo: 15, icon: "sun", blurb: "Bright and windy. A good beach day if you like it fresh.", short: "Bright and windy",
+        rain: "20%", wind: "30 km/h", hum: "75%",
+        hours: [["06", 15], ["09", 17], ["12", 20], ["15", 21], ["18", 20], ["21", 17]] }
     ]
   },
-  {
-    key: "tky", label: "Tokyo", name: "Tokyo", region: "Kantō, Japan", tz: "GMT+9",
-    accent: "#C0455F", tint: "#EEB2BC", icons: ["iconStorm", "iconHot"],
+  waw: {
+    tint: "#EBC0AC",
     days: [
-      { hi: 33, lo: 26, blurb: "Heavy and humid all morning. Thunderstorms roll in after three.", short: "Storms after three",
-        rain: "70%", wind: "11 km/h", hum: "88%",
-        hours: [["06", 26], ["09", 29], ["12", 32], ["15", 33], ["18", 30], ["21", 28]] },
-      { hi: 34, lo: 27, blurb: "Hot and hazy. No real relief until well after dark.", short: "Hot and hazy",
-        rain: "20%", wind: "9 km/h", hum: "84%",
-        hours: [["06", 27], ["09", 30], ["12", 33], ["15", 34], ["18", 32], ["21", 29]] }
+      { hi: 25, lo: 14, icon: "partly", blurb: "Hazy sun through the afternoon, one short shower around seven.", short: "Hazy sun",
+        rain: "25%", wind: "14 km/h", hum: "61%",
+        hours: [["06", 15], ["09", 19], ["12", 23], ["15", 25], ["18", 23], ["21", 18]] },
+      { hi: 27, lo: 15, icon: "sun", blurb: "Hot and dry. The city holds the heat well past sunset.", short: "Hot and dry",
+        rain: "10%", wind: "11 km/h", hum: "55%",
+        hours: [["06", 16], ["09", 21], ["12", 25], ["15", 27], ["18", 25], ["21", 20]] }
     ]
   }
-];
+};
+/* FORECAST-DATA-END */
 
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { city: 0, day: 0 };
+    this.state = { place: 0, day: 0 };
   }
 
   isF() {
@@ -370,10 +397,11 @@ class Component extends DCLogic {
   renderVals() {
     var self = this;
     var day = this.state.day;
-    var idx = this.state.city;
-    var city = CITIES[idx];
-    var d = city.days[day];
-    var o = city.days[1 - day];
+    var idx = this.state.place;
+    var place = PLACES[idx];
+    var f = FORECAST[place.key];
+    var d = f.days[day];
+    var o = f.days[1 - day];
 
     var temps = d.hours.map(function (h) { return h[1]; });
     var lo = Math.min.apply(null, temps);
@@ -381,53 +409,57 @@ class Component extends DCLogic {
     var span = Math.max(1, hi - lo);
 
     var c = {
-      name: city.name,
-      region: city.region,
-      tz: city.tz,
-      accent: city.accent,
+      name: place.name,
+      region: place.region,
+      code: place.code,
+      accent: place.accent,
       hi: this.t(d.hi),
       lo: this.t(d.lo),
       blurb: d.blurb,
       rain: d.rain,
       wind: d.wind,
       hum: d.hum,
+      isSun: d.icon === "sun",
+      isPartly: d.icon === "partly",
+      isRain: d.icon === "rain",
+      isStorm: d.icon === "storm",
       hours: d.hours.map(function (h) {
         return {
           label: h[0],
           t: self.t(h[1]),
           hpx: Math.round(14 + ((h[1] - lo) / span) * 42),
-          bg: h[1] === hi ? city.accent : city.tint
+          bg: h[1] === hi ? place.accent : f.tint
         };
       }),
       otherHi: this.t(o.hi),
-      otherShort: o.short,
-      iconFog: false, iconSun: false, iconRain: false,
-      iconPartly: false, iconStorm: false, iconHot: false
+      otherShort: o.short
     };
-    c[city.icons[day]] = true;
 
     var on = "background: #2E2A24; color: #FBF7F1; border-color: #2E2A24;";
     var off = "background: transparent; color: #7C7166; border-color: transparent;";
+    var live = !!META.source;
 
     return {
       c: c,
       deg: this.isF() ? "°F" : "°C",
-      isSF: idx === 0,
-      isLDN: idx === 1,
-      isTKY: idx === 2,
+      isDTG: idx === 0,
+      isDEB: idx === 1,
+      isWAW: idx === 2,
+      dataDotStyle: live ? "background: #8FCB6A;" : "background: #E8B84B;",
+      dataTitle: live ? "Live" : "Placeholder",
       satStyle: day === 0 ? on : off,
       sunStyle: day === 1 ? on : off,
       otherLabel: day === 0 ? "Sunday 23" : "Saturday 22",
       pickSat: function () { self.setState({ day: 0 }); },
       pickSun: function () { self.setState({ day: 1 }); },
       flipDay: function () { self.setState({ day: 1 - self.state.day }); },
-      tabs: CITIES.map(function (ct, i) {
+      tabs: PLACES.map(function (pl, i) {
         return {
-          label: ct.label,
+          label: pl.label,
           style: i === idx
-            ? "background: " + ct.accent + "; color: #FFFDF9; border-color: " + ct.accent + ";"
+            ? "background: " + pl.accent + "; color: #FFFDF9; border-color: " + pl.accent + ";"
             : "background: #FFFDF9; color: #7C7166; border-color: #E7DFD3;",
-          pick: function () { self.setState({ city: i }); }
+          pick: function () { self.setState({ place: i }); }
         };
       })
     };

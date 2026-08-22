@@ -11,14 +11,14 @@
       "x": -350,
       "y": 0,
       "w": 290,
-      "text": "Sat 22 + Sun 23 August 2026.\n\nAll forecast numbers are sample data — plausible late-August values, not a live feed. Swap them for real ones before this goes anywhere.\n\nBoth top artboards are live: the day toggle and the card footers work, and the phone has a working city switcher."
+      "text": "Döttingen (CH-5312) · Dębina (PL 76-211) · Warszawa.\nSat 22 + Sun 23 August 2026.\n\nThe numbers are still placeholders — the amber strip at the top says so, and it turns green once a real source is wired in.\n\nThis sandbox cannot reach any weather host, so the forecast could not be fetched here. Run fetch-forecast.mjs from a normal machine and the strip flips to \"Live · Open-Meteo\"."
     },
     {
       "id": "directions",
       "x": 1300,
-      "y": 1130,
+      "y": 1250,
       "w": 300,
-      "text": "Two alternate directions, kept low-fi on purpose — they are here to argue with, not to ship.\n\nThe built version above is the warm-editorial direction: flat vector city scenes, cream ground, one accent per city.\n\nSay which one you want and I will build it into the main artboards."
+      "text": "Two alternate directions, kept low-fi on purpose — they are here to argue with, not to ship.\n\nThe built version above is the warm-editorial direction: flat vector scenes, cream ground, one accent per place — vine green, Baltic blue, Warsaw brick.\n\nSay which one you want and I will build it into the main artboards."
     }
   ],
   "launch": { "view": "canvas" }
