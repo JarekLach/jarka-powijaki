@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pilot moOde</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top, #131a33 0%, #0b0e1a 60%, #05060c 100%);
+    color: #e8ecf7;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 24px 16px 60px;
+  }
+
+  header { text-align: center; margin-bottom: 24px; }
+  header h1 { font-size: 1.8rem; letter-spacing: 0.02em; }
+  header p { color: #8a93b8; margin-top: 6px; font-size: 0.9rem; }
+
+  main { max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+
+  .card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 22px;
+  }
+
+  .card h2 {
+    font-size: 1rem;
+    color: #a7b0d6;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  /* --- teraz gra --- */
+  .cover {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05) center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #3a4266;
+    margin-bottom: 16px;
+  }
+  .cover.has-img { font-size: 0; }
+
+  .title { font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+  .artist { color: #c3c9e6; margin-top: 4px; }
+  .album { color: #8a93b8; font-size: 0.9rem; margin-top: 2px; }
+  .format { color: #6d7699; font-size: 0.8rem; margin-top: 10px; font-variant-numeric: tabular-nums; }
+
+  /* --- przyciski --- */
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  button:hover { background: rgba(255, 255, 255, 0.13); }
+  button:active { transform: scale(0.94); }
+  button.big { width: 76px; height: 76px; font-size: 1.8rem; background: #3b4ea8; border-color: #5568c4; }
+  button.big:hover { background: #4a5ec0; }
+  button.small { width: 44px; height: 44px; font-size: 1rem; }
+  button.on { background: #7a3b3b; border-color: #a04f4f; }
+
+  /* --- głośność --- */
+  .volume { display: flex; align-items: center; gap: 12px; }
+  .volume input[type=range] { flex: 1; accent-color: #6b7fe0; height: 28px; }
+  .vol-value { width: 3ch; text-align: right; font-variant-numeric: tabular-nums; color: #c3c9e6; }
+
+  /* --- ustawienia --- */
+  .settings label { display: block; color: #8a93b8; font-size: 0.85rem; margin-bottom: 6px; }
+  .settings .row { display: flex; gap: 8px; }
+  .settings input[type=text] {
+    flex: 1;
+    min-width: 0;
+    font: inherit;
+    color: inherit;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .settings .save {
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+
+  .status { font-size: 0.85rem; color: #8a93b8; margin-top: 12px; line-height: 1.5; }
+  .status .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: #555; }
+  .status.ok .dot { background: #4fc27a; }
+  .status.blind .dot { background: #e0b04f; }
+  .status.err .dot { background: #e05f5f; }
+
+  .hint {
+    font-size: 0.85rem;
+    color: #a7b0d6;
+    line-height: 1.55;
+    margin-top: 12px;
+    display: none;
+  }
+  .hint.show { display: block; }
+  .hint code {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    word-break: break-all;
+  }
+
+  footer { text-align: center; color: #5a6285; font-size: 0.8rem; margin-top: 28px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎵 Pilot moOde</h1>
+  <p>Sterowanie odtwarzaczem w sieci domowej</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Teraz gra</h2>
+    <div class="cover" id="cover">♪</div>
+    <div class="title" id="title">—</div>
+    <div class="artist" id="artist"></div>
+    <div class="album" id="album"></div>
+    <div class="format" id="format"></div>
+
+    <div class="controls">
+      <button class="small" id="btn-stop" title="Stop">■</button>
+      <button id="btn-prev" title="Poprzedni">⏮</button>
+      <button class="big" id="btn-play" title="Odtwarzaj / pauza (spacja)">▶</button>
+      <button id="btn-next" title="Następny">⏭</button>
+      <button class="small" id="btn-mute" title="Wycisz">🔇</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Głośność</h2>
+    <div class="volume">
+      <button class="small" id="btn-vol-dn" title="Ciszej (↓)">−</button>
+      <input type="range" id="vol" min="0" max="100" step="1" value="0" />
+      <button class="small" id="btn-vol-up" title="Głośniej (↑)">+</button>
+      <span class="vol-value" id="vol-value">–</span>
+    </div>
+  </section>
+
+  <section class="card settings">
+    <h2>Połączenie</h2>
+    <label for="host">Adres odtwarzacza</label>
+    <div class="row">
+      <input type="text" id="host" spellcheck="false" autocomplete="off" />
+      <button class="save" id="btn-save">Połącz</button>
+    </div>
+    <div class="status" id="status"><span class="dot"></span>Łączę…</div>
+    <div class="hint" id="hint"></div>
+  </section>
+</main>
+
+<footer>moOde HTTP Command API · /command/?cmd=…</footer>
+
+<script>
+  // ═══════════════════════════════════════════════
+  //  Konfiguracja
+  // ═══════════════════════════════════════════════
+  const POLL_MS = 3000;
+  const VOL_STEP = 5;
+  const STORE_KEY = "moode-pilot-host";
+
+  // Strona wgrana na sam moOde (np. /var/www/pilot.html) gada z własnym hostem.
+  // W przeciwnym razie domyślnie moode.local.
+  const servedFromMoode = location.protocol.startsWith("http") &&
+    !location.hostname.endsWith("github.io") && location.hostname !== "";
+  const defaultHost = servedFromMoode ? location.origin : "http://moode.local";
+
+  function loadHost() {
+    try { return localStorage.getItem(STORE_KEY) || defaultHost; } catch { return defaultHost; }
+  }
+  function saveHost(h) {
+    try { localStorage.setItem(STORE_KEY, h); } catch {}
+  }
+  function normalizeHost(h) {
+    h = h.trim().replace(/\/+$/, "");
+    if (!/^https?:\/\//.test(h)) h = "http://" + h;
+    return h;
+  }
+
+  let host = normalizeHost(loadHost());
+  let state = { playing: "stop", volume: null, mute: false };
+  let canRead = false;      // czy przeglądarka pozwala czytać odpowiedzi (CORS)
+  let volDragging = false;
+  let pollTimer = null;
+
+  const $ = (id) => document.getElementById(id);
+
+  // ═══════════════════════════════════════════════
+  //  Komunikacja z moOde
+  // ═══════════════════════════════════════════════
+  function cmdUrl(cmd) {
+    return host + "/command/?cmd=" + encodeURIComponent(cmd);
+  }
+
+  // Odczyt: wymaga tego samego originu albo nagłówków CORS po stronie moOde.
+  async function read(cmd) {
+    const r = await fetch(cmdUrl(cmd), { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }
+
+  // Zapis: jeśli odczyt jest zablokowany, wysyłamy „na ślepo” (no-cors).
+  // Żądanie dociera do moOde, ale nie widzimy odpowiedzi.
+  async function send(cmd) {
+    try {
+      if (canRead) {
+        await fetch(cmdUrl(cmd), { cache: "no-store" });
+      } else {
+        await fetch(cmdUrl(cmd), { mode: "no-cors", cache: "no-store" });
+      }
+    } catch (e) {
+      setStatus("err", "Nie udało się wysłać polecenia: " + e.message);
+      showHint();
+      return;
+    }
+    if (canRead) setTimeout(poll, 300);
+  }
+
+  // ═══════════════════════════════════════════════
+  //  Stan i widok
+  // ═══════════════════════════════════════════════
+  async function poll() {
+    try {
+      const s = await read("get_currentsong");
+      canRead = true;
+      render(s);
+      setStatus("ok", "Połączono z " + host);
+      $("hint").classList.remove("show");
+    } catch (e) {
+      canRead = false;
+      // Sprawdź, czy host w ogóle odpowiada (no-cors nie rzuca, gdy serwer żyje).
+      try {
+        await fetch(cmdUrl("get_volume"), { mode: "no-cors", cache: "no-store" });
+        setStatus("blind", "moOde odpowiada, ale przeglądarka blokuje odczyt stanu. Przyciski działają bez podglądu.");
+      } catch {
+        setStatus("err", "Brak połączenia z " + host);
+      }
+      showHint();
+    }
+  }
+
+  function render(s) {
+    state.playing = s.state || "stop";
+    state.mute = s.mute === "1" || s.mute === 1 || s.volume === "mute";
+
+    const isRadio = (s.file || "").startsWith("http");
+    $("title").textContent = s.title || (isRadio ? s.album : s.file) || "—";
+    $("artist").textContent = s.artist && s.artist !== "Radio station" ? s.artist : "";
+    $("album").textContent = isRadio ? "" : (s.album || "");
+
+    const fmt = [s.encoded, s.bitrate, s.outrate].filter((x) => x && x !== "Not playing").join(" · ");
+    $("format").textContent = fmt;
+
+    const cover = $("cover");
+    if (s.coverurl) {
+      const url = /^https?:/.test(s.coverurl) ? s.coverurl
+        : host + "/" + s.coverurl.replace(/^\//, "");
+      cover.style.backgroundImage = 'url("' + url.replace(/"/g, "%22") + '")';
+      cover.classList.add("has-img");
+    } else {
+      cover.style.backgroundImage = "";
+      cover.classList.remove("has-img");
+    }
+
+    $("btn-play").textContent = state.playing === "play" ? "⏸" : "▶";
+    $("btn-mute").classList.toggle("on", state.mute);
+
+    const v = parseInt(s.volume, 10);
+    if (!Number.isNaN(v)) {
+      state.volume = v;
+      if (!volDragging) $("vol").value = v;
+      $("vol-value").textContent = v;
+    }
+  }
+
+  function setStatus(kind, text) {
+    const el = $("status");
+    el.className = "status " + kind;
+    el.innerHTML = '<span class="dot"></span>';
+    el.appendChild(document.createTextNode(text));
+  }
+
+  function showHint() {
+    const hint = $("hint");
+    let html = "";
+    if (location.protocol === "https:" && host.startsWith("http:")) {
+      html += "<p><b>Strona jest otwarta przez HTTPS</b>, a moOde działa po HTTP. " +
+        "Przeglądarka blokuje takie połączenia (mixed content).</p><br>";
+    }
+    html += "<p>Najprościej wgrać tę stronę na sam odtwarzacz. Wtedy działa też podgląd utworu:</p>" +
+      "<p><code>scp moode-pilot.html pi@moode.local:/tmp/ &amp;&amp; " +
+      "ssh pi@moode.local sudo mv /tmp/moode-pilot.html /var/www/pilot.html</code></p>" +
+      "<p>i otworzyć <code>http://moode.local/pilot.html</code>.</p><br>" +
+      "<p>Telefon lub komputer musi być w tej samej sieci co moOde. " +
+      "Jeśli <code>moode.local</code> nie działa (częste na Androidzie), wpisz adres IP odtwarzacza.</p>";
+    hint.innerHTML = html;
+    hint.classList.add("show");
+  }
+
+  // ═══════════════════════════════════════════════
+  //  Akcje
+  // ═══════════════════════════════════════════════
+  function playPause() {
+    if (state.playing === "play") {
+      send("pause 1");
+      state.playing = "pause";
+    } else {
+      send("play");
+      state.playing = "play";
+    }
+    // Bez odczytu stanu przełączamy ikonę lokalnie.
+    if (!canRead) $("btn-play").textContent = state.playing === "play" ? "⏸" : "▶";
+  }
+
+  function volStep(dir) {
+    send("set_volume " + (dir > 0 ? "-up " : "-dn ") + VOL_STEP);
+    if (state.volume !== null) {
+      state.volume = Math.max(0, Math.min(100, state.volume + dir * VOL_STEP));
+      $("vol").value = state.volume;
+      $("vol-value").textContent = state.volume;
+    }
+  }
+
+  $("btn-play").onclick = playPause;
+  $("btn-stop").onclick = () => { send("stop"); state.playing = "stop"; if (!canRead) $("btn-play").textContent = "▶"; };
+  $("btn-prev").onclick = () => send("previous");
+  $("btn-next").onclick = () => send("next");
+  $("btn-mute").onclick = () => {
+    send("set_volume -mute");
+    state.mute = !state.mute;
+    $("btn-mute").classList.toggle("on", state.mute);
+  };
+  $("btn-vol-up").onclick = () => volStep(1);
+  $("btn-vol-dn").onclick = () => volStep(-1);
+
+  const vol = $("vol");
+  vol.addEventListener("input", () => { volDragging = true; $("vol-value").textContent = vol.value; });
+  vol.addEventListener("change", () => {
+    volDragging = false;
+    state.volume = parseInt(vol.value, 10);
+    send("set_volume " + vol.value);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "INPUT" && e.target.type === "text") return;
+    if (e.code === "Space") { e.preventDefault(); playPause(); }
+    else if (e.code === "ArrowRight") send("next");
+    else if (e.code === "ArrowLeft") send("previous");
+    else if (e.code === "ArrowUp") { e.preventDefault(); volStep(1); }
+    else if (e.code === "ArrowDown") { e.preventDefault(); volStep(-1); }
+  });
+
+  // ═══════════════════════════════════════════════
+  //  Start
+  // ═══════════════════════════════════════════════
+  function connect() {
+    clearInterval(pollTimer);
+    setStatus("", "Łączę z " + host + "…");
+    poll();
+    pollTimer = setInterval(() => { if (!document.hidden) poll(); }, POLL_MS);
+  }
+
+  $("host").value = host;
+  $("btn-save").onclick = () => {
+    host = normalizeHost($("host").value);
+    $("host").value = host;
+    saveHost(host);
+    connect();
+  };
+  $("host").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-save").click(); });
+
+  connect();
+</script>
+</body>
+</html>
